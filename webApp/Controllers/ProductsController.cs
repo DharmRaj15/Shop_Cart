@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webApp.Data;
-using webApp.Entities;
+using Core.Entities;
+using Infrastructure.Data;
+using Core.Interfaces;
 
 namespace webApp.Controllers
 {
@@ -13,10 +14,10 @@ namespace webApp.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly StoreContext _context;
-        public ProductsController(StoreContext context)
+        private IProductRepository _Repo;
+        public ProductsController(IProductRepository Repo)
         {
-            _context = context;
+           _Repo = Repo;
         }
 
         [HttpGet]
@@ -27,14 +28,14 @@ namespace webApp.Controllers
         //}
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _Repo.GetProductsAsync();
             return Ok(products);
         }
 
         [HttpGet("Id")]
         public async Task<ActionResult<Product>> GetProducts(int Id)
         {
-            return await _context.Products.FindAsync(Id);
+            return await _Repo.GetProductByIdAsync(Id);
         }
     }
 }

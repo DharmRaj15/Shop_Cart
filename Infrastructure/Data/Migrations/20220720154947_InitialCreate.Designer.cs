@@ -2,16 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using webApp.Data;
 
-namespace webApp.Data.Migrations
+
+namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     [Migration("20220720154947_InitialCreate")]
     partial class InitialCreate
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        //removed override from this method
+        protected  void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
