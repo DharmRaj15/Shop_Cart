@@ -17,7 +17,7 @@ namespace webApp.Controllers
         private IProductRepository _Repo;
         public ProductsController(IProductRepository Repo)
         {
-           _Repo = Repo;
+            _Repo = Repo;
         }
 
         [HttpGet]
@@ -37,5 +37,19 @@ namespace webApp.Controllers
         {
             return await _Repo.GetProductByIdAsync(Id);
         }
+
+        //added later..
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+        {
+            return Ok(await _Repo.GetProductsAsync());
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            return Ok(await _Repo.GetProductTypessAsync());
+        }
+
     }
 }
