@@ -56,6 +56,8 @@ namespace webApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            //for image static 
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
