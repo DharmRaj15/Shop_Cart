@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using webApp.Controllers.Middleware;
 using webApp.Helper;
 //using webApp.Data;
 
@@ -46,12 +47,18 @@ namespace webApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //new our own code
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //use own code
+                //app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "webApp v1"));
             }
+
+            //error api controller redirect
+            app.UseStatusCodePagesWithReExecute("errors/{0}");
 
             app.UseHttpsRedirection();
 
