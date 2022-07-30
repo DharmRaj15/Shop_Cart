@@ -38,10 +38,10 @@ namespace webApp.Controllers
         //    var products = _context.Products.ToList();
         //    return Ok(products);
         //}
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort, int? brandId, int? typeId)
         {
             //new spec
-            var spec = new ProductWithTypesAndBrandSpecification();
+            var spec = new ProductWithTypesAndBrandSpecification(sort,brandId,typeId);
 
             var products = await _productRepo.ListAsync(spec);
 
